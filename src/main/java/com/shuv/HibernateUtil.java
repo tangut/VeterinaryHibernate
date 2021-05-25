@@ -1,0 +1,37 @@
+package com.shuv;
+
+import com.shuv.model.*;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.cfg.Environment;
+
+import java.util.Properties;
+
+public class HibernateUtil {
+
+    private static SessionFactory sessionFactory;
+
+    private HibernateUtil() {}
+
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            try {
+                Properties properties = new Properties();
+                properties.put(Environment.SHOW_SQL, "true");
+                Configuration configuration = new Configuration().configure();
+                configuration.addAnnotatedClass(User.class);
+                configuration.addAnnotatedClass(Pet.class);
+                configuration.addAnnotatedClass(Diagnose.class);
+                configuration.addAnnotatedClass(Address.class);
+                configuration.addAnnotatedClass(Medicines.class);
+                configuration.addAnnotatedClass(Monkey.class);
+                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+                sessionFactory = configuration.buildSessionFactory(builder.build());
+            } catch (Exception e) {
+                System.out.println("Enitial SessionFactory creation failed" + e);
+            }
+        }
+        return sessionFactory;
+    }
+}
