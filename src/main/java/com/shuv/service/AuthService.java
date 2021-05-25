@@ -11,7 +11,7 @@ public class AuthService {
     private final UserDao userDao = new UserDao();
 
     public void login(Integer id, String password){
-        User user = userDao.getUserById(id);
+        User user = userDao.findById(id);
         if (user == null){
             System.out.println("Incorrect data.");
         }
@@ -30,7 +30,7 @@ public class AuthService {
     }
 
     public void signUp(String login, String name, int age, String password){
-        User user = userDao.getUserByLogin(login);
+        User user = userDao.findByLogin(login);
         if (user != null){
             System.out.println("Please, enter another login.");
             return;
@@ -49,7 +49,7 @@ public class AuthService {
         }
         String hashPassword = DigestUtils.sha256Hex(password).toString();
         User addedUser = new User(name, age, login, hashPassword);
-        userDao.addUser(addedUser);
+        userDao.save(addedUser);
     }
 
     public Boolean isAuth() {

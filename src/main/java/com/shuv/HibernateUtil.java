@@ -17,8 +17,6 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
-                Properties properties = new Properties();
-                properties.put(Environment.SHOW_SQL, "true");
                 Configuration configuration = new Configuration().configure();
                 configuration.addAnnotatedClass(User.class);
                 configuration.addAnnotatedClass(Pet.class);
