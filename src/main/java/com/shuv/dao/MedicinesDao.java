@@ -1,42 +1,42 @@
 package com.shuv.dao;
 
 import com.shuv.HibernateUtil;
-import com.shuv.model.Address;
+import com.shuv.model.Medicines;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 
-public class AddressDao {
-    public Address findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Address.class, id);
+public class MedicinesDao {
+    public Medicines findById(int id) {
+        return HibernateUtil.getSessionFactory().openSession().get(Medicines.class, id);
     }
 
-    void save(Address address) {
+    void save(Medicines medicines) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.save(address);
+        session.save(medicines);
         tx1.commit();
         session.close();
     }
 
-    public void update(Address address) {
+    public void update(Medicines medicines) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.merge(address);
+        session.merge(medicines);
         tx1.commit();
         session.close();
     }
 
-    public void delete(Address address) {
+    public void delete(Medicines medicines) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.delete(address);
+        session.delete(medicines);
         tx1.commit();
         session.close();
     }
 
-    public ArrayList<Address> findAll() {
-        return (ArrayList<Address>)  HibernateUtil.getSessionFactory().openSession().createQuery("From addresses").list();
+    public ArrayList<Medicines> findAll() {
+        return (ArrayList<Medicines>)  HibernateUtil.getSessionFactory().openSession().createQuery("From medicines").list();
     }
 }

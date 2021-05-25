@@ -1,42 +1,42 @@
 package com.shuv.dao;
 
 import com.shuv.HibernateUtil;
-import com.shuv.model.Address;
+import com.shuv.model.Monkey;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 
-public class AddressDao {
-    public Address findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Address.class, id);
+public class MonkeyDao {
+    public Monkey findById(int id) {
+        return HibernateUtil.getSessionFactory().openSession().get(Monkey.class, id);
     }
 
-    void save(Address address) {
+    void save(Monkey monkey) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.save(address);
+        session.save(monkey);
         tx1.commit();
         session.close();
     }
 
-    public void update(Address address) {
+    public void update(Monkey monkey) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.merge(address);
+        session.merge(monkey);
         tx1.commit();
         session.close();
     }
 
-    public void delete(Address address) {
+    public void delete(Monkey monkey) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
-        session.delete(address);
+        session.delete(monkey);
         tx1.commit();
         session.close();
     }
 
-    public ArrayList<Address> findAll() {
-        return (ArrayList<Address>)  HibernateUtil.getSessionFactory().openSession().createQuery("From addresses").list();
+    public ArrayList<Monkey> findAll() {
+        return (ArrayList<Monkey>)  HibernateUtil.getSessionFactory().openSession().createQuery("From monkey").list();
     }
 }
