@@ -19,6 +19,7 @@ public class Address {
     private String building;
 
     @OneToMany(targetEntity = User.class)
+    @JoinColumn(name = "address_id")
     @JsonManagedReference
     private List<User> users;
 

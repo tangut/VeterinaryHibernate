@@ -21,4 +21,7 @@ public class ValidationUtils {
         return password != null && !(password.equals("")) && password.length() >= 5;
     }
 
+    public static boolean isValidName(String name) {
+        return name != null && !(name.equals(""));
+    }
 }

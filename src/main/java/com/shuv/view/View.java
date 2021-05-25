@@ -10,6 +10,7 @@ public class View implements ViewInterface {
     public static final View viewInstance = new View();
     private final AuthService authService = new AuthService();
     private final UserView userView = new UserView();
+    private final AddressView addressView = new AddressView();
     private static int page = 0;
 
     public void execute(){
@@ -27,6 +28,10 @@ public class View implements ViewInterface {
             }
             case 1:{
                 userView.parseCommand();
+                break;
+            }
+            case 2:{
+                addressView.parseCommand();
                 break;
             }
         }
@@ -75,7 +80,7 @@ public class View implements ViewInterface {
         System.out.println("Enter command:");
         System.out.println("1 - login");
         System.out.println("2 - signUp");
-        System.out.println("3 - exit from application");
+        System.out.println("0 - exit from application");
         int mode = in.nextInt();
         switch (mode){
             case 1 : {
@@ -86,7 +91,7 @@ public class View implements ViewInterface {
                 signUp();
                 break;
             }
-            case 3 : {
+            case 0 : {
                 System.exit(0);
                 break;
             }
@@ -100,11 +105,16 @@ public class View implements ViewInterface {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter number of page, which you want to watch:");
         System.out.println("1 - list of users.");
+        System.out.println("2 - list of addresses");
         System.out.println("0 - exit the application.");
         int mode = in.nextInt();
         switch (mode){
             case 1:{
                 page = 1;
+                break;
+            }
+            case 2:{
+                page = 2;
                 break;
             }
             case 0:{

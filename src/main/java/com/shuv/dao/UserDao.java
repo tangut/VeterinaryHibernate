@@ -26,7 +26,6 @@ public class UserDao {
         User user = null;
         List<User> list = new ArrayList<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction tx1 = session.beginTransaction();
         list = session.createQuery("FROM User WHERE login = :login", User.class).setParameter("login", login).list();
         if (!list.isEmpty()){
             user = list.get(0);
