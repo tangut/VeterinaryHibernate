@@ -1,6 +1,6 @@
 package com.shuv.dao;
 
-import com.shuv.HibernateUtil;
+import com.shuv.Utils.HibernateUtil;
 import com.shuv.model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,7 +13,13 @@ import java.util.List;
 public class UserDao {
 
     public User findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(User.class, id);
+        User user = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        user = session.get(User.class, id);
+        if (session != null){
+            session.close();
+        }
+        return user;
     }
 
     public User findByLogin(String login){
@@ -24,6 +30,9 @@ public class UserDao {
         list = session.createQuery("FROM User WHERE login = :login", User.class).setParameter("login", login).list();
         if (!list.isEmpty()){
             user = list.get(0);
+        }
+        if (session != null){
+            session.close();
         }
         return user;
     }
@@ -53,6 +62,6 @@ public class UserDao {
     }
 
     public ArrayList<User> findAll() {
-        return (ArrayList<User>)  HibernateUtil.getSessionFactory().openSession().createQuery("From users").list();
+        return (ArrayList<User>)  HibernateUtil.getSessionFactory().openSession().createQuery("From User").list();
     }
 }

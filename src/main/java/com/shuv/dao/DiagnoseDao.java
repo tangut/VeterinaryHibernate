@@ -1,7 +1,8 @@
 package com.shuv.dao;
 
-import com.shuv.HibernateUtil;
+import com.shuv.Utils.HibernateUtil;
 import com.shuv.model.Diagnose;
+import com.shuv.model.Pet;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -9,10 +10,16 @@ import java.util.ArrayList;
 
 public class DiagnoseDao {
     public Diagnose findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Diagnose.class, id);
+        Diagnose diagnose = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        diagnose = session.get(Diagnose.class, id);
+        if (session != null){
+            session.close();
+        }
+        return diagnose;
     }
 
-    void save(Diagnose diagnose) {
+    public void save(Diagnose diagnose) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
         session.save(diagnose);
@@ -37,6 +44,6 @@ public class DiagnoseDao {
     }
 
     public ArrayList<Diagnose> findAll() {
-        return (ArrayList<Diagnose>)  HibernateUtil.getSessionFactory().openSession().createQuery("From diagnoses").list();
+        return (ArrayList<Diagnose>)  HibernateUtil.getSessionFactory().openSession().createQuery("From Diagnose").list();
     }
 }

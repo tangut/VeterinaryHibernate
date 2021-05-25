@@ -1,14 +1,16 @@
 package com.shuv.view;
 
+import com.shuv.Utils.ValidationUtils;
 import com.shuv.service.AuthService;
 
 import java.util.Scanner;
 
 public class View implements ViewInterface {
 
-    public static final View intsance = new View();
+    public static final View viewInstance = new View();
     private final AuthService authService = new AuthService();
-    private int page = 0;
+    private final UserView userView = new UserView();
+    private static int page = 0;
 
     public void execute(){
         while (true){
@@ -21,6 +23,11 @@ public class View implements ViewInterface {
         switch (page){
             case 0:{
                 baseParseCommand();
+                break;
+            }
+            case 1:{
+                userView.parseCommand();
+                break;
             }
         }
     }
@@ -52,8 +59,11 @@ public class View implements ViewInterface {
         System.out.println("Enter your password:");
         String password = in.nextLine();
         System.out.println("Enter your age:");
-        int age = in.nextInt();
-        authService.signUp(login, name, age, password);
+        String age = in.nextLine();
+        while (!ValidationUtils.isDigit(age)){
+            System.out.println("Enter digit value of age.");
+        }
+        authService.signUp(login, name, Integer.parseInt(age), password);
     }
 
     public void logout(){
@@ -87,7 +97,27 @@ public class View implements ViewInterface {
     }
 
     public void actionAuthUser(){
-        System.out.println("Soon");
-        System.exit(0);
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter number of page, which you want to watch:");
+        System.out.println("1 - list of users.");
+        System.out.println("0 - exit the application.");
+        int mode = in.nextInt();
+        switch (mode){
+            case 1:{
+                page = 1;
+                break;
+            }
+            case 0:{
+                System.exit(0);
+            }
+            default:{
+                System.out.println("Incorrect data!");
+                break;
+            }
+        }
+    }
+
+    void goToMain() {
+        page = 0;
     }
 }

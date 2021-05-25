@@ -1,6 +1,8 @@
 package com.shuv.model;
 
-import javax.jws.soap.SOAPBinding;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -21,6 +23,7 @@ public class Pet {
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private User master;
 
 
@@ -30,6 +33,7 @@ public class Pet {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name =  "diagnose_id")
+    @JsonManagedReference
     private Diagnose diagnose;
 
     public Pet(Integer id, String name, String kind, String breed, Diagnose diagnose, User master) {

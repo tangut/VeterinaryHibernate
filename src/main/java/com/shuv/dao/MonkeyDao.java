@@ -1,7 +1,8 @@
 package com.shuv.dao;
 
-import com.shuv.HibernateUtil;
+import com.shuv.Utils.HibernateUtil;
 import com.shuv.model.Monkey;
+import com.shuv.model.Pet;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -9,10 +10,16 @@ import java.util.ArrayList;
 
 public class MonkeyDao {
     public Monkey findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Monkey.class, id);
+        Monkey pet = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        pet = session.get(Monkey.class, id);
+        if (session != null){
+            session.close();
+        }
+        return pet;
     }
 
-    void save(Monkey monkey) {
+    public void save(Monkey monkey) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
         session.save(monkey);
@@ -37,6 +44,6 @@ public class MonkeyDao {
     }
 
     public ArrayList<Monkey> findAll() {
-        return (ArrayList<Monkey>)  HibernateUtil.getSessionFactory().openSession().createQuery("From monkey").list();
+        return (ArrayList<Monkey>)  HibernateUtil.getSessionFactory().openSession().createQuery("From Monkey").list();
     }
 }

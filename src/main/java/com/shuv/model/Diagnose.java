@@ -1,5 +1,7 @@
 package com.shuv.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,10 +17,11 @@ public class Diagnose {
     @Column(name = "simptome")
     private String simptome;
 
-    @ManyToMany(targetEntity = Medicines.class,fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Medicines.class,fetch = FetchType.LAZY)
     //@JoinTable(name = "med_diagnose",
     //joinColumns = @JoinColumn(name = "diagnose_id"),
     //inverseJoinColumns = @JoinColumn(name = "medicine_id"))
+    @JsonManagedReference
     private Set<Medicines> medicinesSet;
 
 

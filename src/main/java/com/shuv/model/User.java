@@ -1,5 +1,8 @@
 package com.shuv.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -22,11 +25,16 @@ public class User {
 
     @ManyToOne(targetEntity = Address.class)
     @JoinColumn(name = "address_id")
+    @JsonBackReference
     private Address address;
 
 
-    @OneToMany(targetEntity = Pet.class)
+    /*
+    @OneToMany(targetEntity = Pet.class, fetch = FetchType.LAZY)
+    @JsonBackReference
     private Set<Pet> petSet;
+
+     */
 
     public User() {
     }
@@ -55,6 +63,7 @@ public class User {
         this.login = login;
     }
 
+    /*
     public Set<Pet> getPetSet() {
         return petSet;
     }
@@ -62,6 +71,8 @@ public class User {
     public void setPetSet(Set<Pet> petSet) {
         this.petSet = petSet;
     }
+
+     */
 
     public User(String name, int age, String password, String login) {
         this.login = login;
@@ -112,12 +123,11 @@ public class User {
                 login.equals(user.login) &&
                 name.equals(user.name) &&
                 password.equals(user.password) &&
-                address.equals(user.address) &&
-                petSet.equals(user.petSet);
+                address.equals(user.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, name, age, password, address, petSet);
+        return Objects.hash(id, login, name, age, password, address);
     }
 }

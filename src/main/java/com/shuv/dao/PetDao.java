@@ -1,18 +1,32 @@
 package com.shuv.dao;
 
-import com.shuv.HibernateUtil;
+import com.shuv.Utils.HibernateUtil;
 import com.shuv.model.Pet;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PetDao {
     public Pet findById(int id) {
-        return HibernateUtil.getSessionFactory().openSession().get(Pet.class, id);
+        Pet pet = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        pet = session.get(Pet.class, id);
+        if (session != null){
+            session.close();
+        }
+        return pet;
     }
 
-    void save(Pet pet) {
+    public ArrayList<Pet> findByMasterID(int masterID){
+        List<Pet> list = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        list = session.createQuery("FROM Pet WHERE user_id = :masterID", Pet.class).setParameter("masterID", masterID).list();
+        return (ArrayList<Pet>) list;
+    }
+
+    public void save(Pet pet) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx1 = session.beginTransaction();
         session.save(pet);
@@ -37,6 +51,6 @@ public class PetDao {
     }
 
     public ArrayList<Pet> findAll() {
-        return (ArrayList<Pet>)  HibernateUtil.getSessionFactory().openSession().createQuery("From pets").list();
+        return (ArrayList<Pet>)  HibernateUtil.getSessionFactory().openSession().createQuery("From Pet").list();
     }
 }

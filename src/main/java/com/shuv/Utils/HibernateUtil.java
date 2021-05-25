@@ -1,12 +1,9 @@
-package com.shuv;
+package com.shuv.Utils;
 
 import com.shuv.model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.cfg.Environment;
-
-import java.util.Properties;
 
 public class HibernateUtil {
 

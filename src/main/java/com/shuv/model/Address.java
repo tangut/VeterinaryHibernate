@@ -1,5 +1,7 @@
 package com.shuv.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class Address {
     private String building;
 
     @OneToMany(targetEntity = User.class)
+    @JsonManagedReference
     private List<User> users;
 
     public Address() {}
@@ -75,5 +78,15 @@ public class Address {
         for (User user: this.users) {
             this.users.remove(user);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", building='" + building + '\'' +
+                '}';
     }
 }
