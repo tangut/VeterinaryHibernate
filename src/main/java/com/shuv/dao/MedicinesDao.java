@@ -6,8 +6,25 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MedicinesDao {
+
+    public Medicines findByDescription(String description){
+        Medicines medicines = null;
+        List<Medicines> list = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        list = session.createQuery("FROM Medicines WHERE description = :description", Medicines.class).setParameter("description", description).list();
+        if (!list.isEmpty()){
+            medicines = list.get(0);
+        }
+        if (session != null){
+            session.close();
+        }
+        return medicines;
+    }
+
+
     public Medicines findById(int id) {
         Medicines medicines = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

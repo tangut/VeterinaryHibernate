@@ -12,6 +12,7 @@ public class View implements ViewInterface {
     private final UserView userView = new UserView();
     private final AddressView addressView = new AddressView();
     private final MedicinesView medicinesView = new MedicinesView();
+    private final DiagnoseView diagnoseView = new DiagnoseView();
     private static int page = 0;
 
     public void execute(){
@@ -38,6 +39,9 @@ public class View implements ViewInterface {
             case 3:{
                 medicinesView.parseCommand();
                 break;
+            }
+            case 4:{
+                diagnoseView.parseCommand();
             }
         }
     }
@@ -112,6 +116,7 @@ public class View implements ViewInterface {
         System.out.println("1 - list of users.");
         System.out.println("2 - list of addresses.");
         System.out.println("3 - list of medicines.");
+        System.out.println("4 - list of diagnoses.");
         System.out.println("0 - exit the application.");
         int mode = in.nextInt();
         switch (mode){
@@ -125,6 +130,10 @@ public class View implements ViewInterface {
             }
             case 3:{
                 page = 3;
+                break;
+            }
+            case 4:{
+                page = 4;
                 break;
             }
             case 0:{

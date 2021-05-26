@@ -9,7 +9,7 @@ import java.util.Set;
 @Table(name = "diagnoses")
 public class Diagnose {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "name")
@@ -17,20 +17,26 @@ public class Diagnose {
     @Column(name = "simptome")
     private String simptome;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable (name="med_diagnose",
             joinColumns=@JoinColumn (name="diagnose_id"),
             inverseJoinColumns=@JoinColumn(name="medicine_id"))
      @JsonManagedReference
     private Set<Medicines> medicinesSet;
 
+    public Set<Medicines> getMedicinesSet() {
+        return medicinesSet;
+    }
+
+    public void setMedicinesSet(Set<Medicines> medicinesSet) {
+        this.medicinesSet = medicinesSet;
+    }
 
     public Diagnose(){
 
     }
 
-    public Diagnose(int id, String name, String simptome, String medicine) {
-        this.id = id;
+    public Diagnose(String name, String simptome) {
         this.name = name;
         this.simptome = simptome;
     }

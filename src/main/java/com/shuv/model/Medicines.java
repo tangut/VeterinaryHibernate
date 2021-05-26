@@ -15,7 +15,7 @@ public class Medicines {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable (name="med_diagnose",
             joinColumns=@JoinColumn (name="medicine_id"),
             inverseJoinColumns=@JoinColumn(name="diagnose_id"))

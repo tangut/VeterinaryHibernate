@@ -74,8 +74,9 @@ public class AddressView implements ViewInterface {
             System.out.println("Enter correct data.");
             id = in.nextLine();
         }
+        Address address1 = addressDao.findById(Integer.parseInt(id));
         List<Address> addressList = addressDao.findAll();//жуткий костыль, но Jackson себя непонятно вел при поиске по ID напрямую
-        if (addressList.isEmpty()){
+        if (addressList.isEmpty() || address1 == null){
             System.out.println("Address does not exist!");
         }
         else{
