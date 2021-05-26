@@ -14,6 +14,7 @@ public class View implements ViewInterface {
     private final MedicinesView medicinesView = new MedicinesView();
     private final DiagnoseView diagnoseView = new DiagnoseView();
     private final PetView petView = new PetView();
+    private final MonkeyView monkeyView = new MonkeyView();
     private static int page = 0;
 
     public void execute(){
@@ -43,9 +44,15 @@ public class View implements ViewInterface {
             }
             case 4:{
                 diagnoseView.parseCommand();
+                break;
             }
             case 5:{
                 petView.parseCommand();
+                break;
+            }
+            case 6:{
+                monkeyView.parseCommand();
+                break;
             }
         }
     }
@@ -122,6 +129,7 @@ public class View implements ViewInterface {
         System.out.println("3 - list of medicines.");
         System.out.println("4 - list of diagnoses.");
         System.out.println("5 - list of pets.");
+        System.out.println("6 - list of monkeys.");
         System.out.println("0 - exit the application.");
         int mode = in.nextInt();
         switch (mode){
@@ -143,6 +151,10 @@ public class View implements ViewInterface {
             }
             case 5:{
                 page = 5;
+                break;
+            }
+            case 6:{
+                page = 6;
                 break;
             }
             case 0:{

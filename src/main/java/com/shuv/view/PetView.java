@@ -28,6 +28,10 @@ public class PetView implements ViewInterface {
         System.out.println("0 - exit to main page.");
         int mode = in.nextInt();
         switch (mode) {
+            default: {
+                System.out.println("Incorrect data.");
+                break;
+            }
             case 0: {
                 View.viewInstance.goToMain();
                 break;

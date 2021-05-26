@@ -15,9 +15,10 @@ public class Monkey extends Pet{
 
     }
 
-    public Monkey(String name, String kind, String breed,  boolean isShaman) {
+    public Monkey(String name, String kind, String breed, boolean isShaman, User master) {
         super(name, kind, breed);
         this.isShaman = isShaman;
+        setMaster(master);
     }
 
     public boolean isShaman() {
