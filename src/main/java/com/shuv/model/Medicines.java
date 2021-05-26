@@ -15,15 +15,17 @@ public class Medicines {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(targetEntity = Diagnose.class)
+    @ManyToMany
+    @JoinTable (name="med_diagnose",
+            joinColumns=@JoinColumn (name="medicine_id"),
+            inverseJoinColumns=@JoinColumn(name="diagnose_id"))
     private List<Diagnose> diagnoseList;
 
     public Medicines(){
 
     }
 
-    public Medicines(Integer id, String description) {
-        this.id = id;
+    public Medicines(String description) {
         this.description = description;
     }
 

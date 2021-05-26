@@ -11,6 +11,7 @@ public class View implements ViewInterface {
     private final AuthService authService = new AuthService();
     private final UserView userView = new UserView();
     private final AddressView addressView = new AddressView();
+    private final MedicinesView medicinesView = new MedicinesView();
     private static int page = 0;
 
     public void execute(){
@@ -32,6 +33,10 @@ public class View implements ViewInterface {
             }
             case 2:{
                 addressView.parseCommand();
+                break;
+            }
+            case 3:{
+                medicinesView.parseCommand();
                 break;
             }
         }
@@ -105,7 +110,8 @@ public class View implements ViewInterface {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter number of page, which you want to watch:");
         System.out.println("1 - list of users.");
-        System.out.println("2 - list of addresses");
+        System.out.println("2 - list of addresses.");
+        System.out.println("3 - list of medicines.");
         System.out.println("0 - exit the application.");
         int mode = in.nextInt();
         switch (mode){
@@ -115,6 +121,10 @@ public class View implements ViewInterface {
             }
             case 2:{
                 page = 2;
+                break;
+            }
+            case 3:{
+                page = 3;
                 break;
             }
             case 0:{

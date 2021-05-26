@@ -17,11 +17,11 @@ public class Diagnose {
     @Column(name = "simptome")
     private String simptome;
 
-    @ManyToMany(targetEntity = Medicines.class,fetch = FetchType.LAZY)
-    //@JoinTable(name = "med_diagnose",
-    //joinColumns = @JoinColumn(name = "diagnose_id"),
-    //inverseJoinColumns = @JoinColumn(name = "medicine_id"))
-    @JsonManagedReference
+    @ManyToMany
+    @JoinTable (name="med_diagnose",
+            joinColumns=@JoinColumn (name="diagnose_id"),
+            inverseJoinColumns=@JoinColumn(name="medicine_id"))
+     @JsonManagedReference
     private Set<Medicines> medicinesSet;
 
 
