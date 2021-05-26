@@ -1,6 +1,5 @@
 package com.shuv.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -26,6 +25,13 @@ public class Pet {
     @JsonManagedReference
     private User master;
 
+    public User getMaster() {
+        return master;
+    }
+
+    public void setMaster(User master) {
+        this.master = master;
+    }
 
     public Pet(){
 
@@ -36,13 +42,10 @@ public class Pet {
     @JsonManagedReference
     private Diagnose diagnose;
 
-    public Pet(Integer id, String name, String kind, String breed, Diagnose diagnose, User master) {
-        this.id = id;
+    public Pet(String name, String kind, String breed) {
         this.name = name;
         this.kind = kind;
-        this.breed = breed;
-        this.diagnose = diagnose;
-        this.master = master;
+        this.breed = breed;;
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.shuv.dao;
 
 import com.shuv.Utils.HibernateUtil;
 import com.shuv.model.Monkey;
-import com.shuv.model.Pet;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
