@@ -44,6 +44,10 @@ public class AddressView implements ViewInterface {
                 editAddress();
                 break;
             }
+            case 4:{
+                deleteAddress();
+                break;
+            }
         }
     }
 
@@ -115,5 +119,18 @@ public class AddressView implements ViewInterface {
         address.setStreet(street);
         addressDao.update(address);
         System.out.println("Address was changed");
+    }
+
+    public void deleteAddress(){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter id of address.");
+        String id = in.nextLine();
+        while (!ValidationUtils.isDigit(id)){
+            System.out.println("Enter correct data.");
+            id = in.nextLine();
+        }
+        Address address = addressDao.findById(Integer.valueOf(id));
+        addressDao.delete(address);
+        System.out.println("Address was deleted.");
     }
 }
